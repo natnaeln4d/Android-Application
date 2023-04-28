@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+      >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/circleimage"
+           >
+<ImageView
+    android:id="@+id/user_id"
+    android:layout_width="70dp"
+    android:layout_height="70dp"
+    android:background="@drawable/circleimage"
+    android:src="@drawable/circleimage"
+    />
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="80dp"
+
+                android:padding="5dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/fullName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Natnael Getachew"
+                    android:textColor="@color/white"
+                    android:textSize="17dp"
+                    android:layout_marginBottom="8px"/>
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="jigijiga ,somali ,Ethiopia"
+                    android:textColor="@color/white"
+                    android:textSize="9dp"
+                    android:padding="2px"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="work :"/>
+                    <TextView
+                        android:id="@+id/work"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Developer"
+                        android:textSize="12dp"
+                        android:padding="2px"/>
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="#4C9815"
+                    android:text="Edit"
+                    android:textSize="12dp"
+                    android:padding="2px"
+                    android:drawableLeft="@drawable/baseline_edit_24"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="#EF7A7A"
+                  android:drawableLeft="@drawable/baseline_delete_24"
+                    android:textSize="12dp"
+                    android:padding="2px"
+                    android:text="Delete"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    />
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

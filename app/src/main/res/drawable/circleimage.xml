@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid android:color="#81000000"/>
+    <corners
+        android:bottomRightRadius="10dp"
+        android:bottomLeftRadius="10dp"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp" />
+</shape>
+<!--    private EditText fullName,work,address;-->
+<!--    private TextView titleTextView;-->
+<!--    private Button addButton;-->
+<!--    private ListView listView;-->
+<!--    TodoListAdapter adapter=new TodoListAdapter(MainActivity2.this,userArrayList);-->
+<!--    binding.listItem.setAdapter(adapter);-->
+<!--    binding.listItem.setClickable(true);-->
+
+<!--    listView=findViewById(R.id.list_item);-->
+<!--    ArrayList<User> userArrayList=new ArrayList<>();-->
+<!--    binding=ActivityMain2Binding.inflate(getLayoutInflater());-->
+<!--    setContentView(binding.getRoot());-->
+<!--    int [] users = new int[4];-->
+<!--    int[] image= {R.drawable.u1, R.drawable.u2, R.drawable.u3, R.drawable.u4};-->
+<!--    String[] FullNames={"Natanel Getachew","yohanes Gertachew","Zebider miliket","Eyob Abate"};-->
+<!--    String[] Jobs={"Developer","Doctor","Teacher","Artist"};-->
+<!--    String[] Location={"jimma oromia Ethiopia","jijiga somali Ethiopia","harege East Ethiopia","A A Ethiopia"};-->
+<!--    int i;-->
+
+
+<!--    for(i=0; i<image.length; i++){-->
+<!--    User user=new User(users[i],FullNames[i],Jobs[i],Location[i],image[i]);-->
+<!--    userArrayList.add(user);-->
+<!--    }-->
