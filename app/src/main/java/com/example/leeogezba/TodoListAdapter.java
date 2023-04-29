@@ -36,9 +36,9 @@ public class TodoListAdapter extends ArrayAdapter<User> {
         TextView fullName=convertView.findViewById(R.id.fullName);
         TextView address=convertView.findViewById(R.id.address);
 
-        imageView.setImageResource(user.photoUrl);
-        fullName.setText(user.fullName);
-        address.setText(user.address);
+        imageView.setImageResource(user.getPhotoUrl());
+        fullName.setText(user.getFullName());
+        address.setText(user.getAddress());
         return convertView;
     }
 }

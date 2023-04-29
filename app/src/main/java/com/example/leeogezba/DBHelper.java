@@ -1,19 +1,26 @@
 package com.example.leeogezba;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DBHelper extends SQLiteOpenHelper {
-
-    private static final String DATABASE_NAME = "mydatabase.db";
+    private static final String DATABASE_NAME = "mydatabase";
     private static final int DATABASE_VERSION = 1;
-
-    // Table creation statement for usersDetails
-    private static final String CREATE_TABLE_USERS_DETAILS =
-            "CREATE TABLE usersDetails (id INTEGER PRIMARY KEY AUTOINCREMENT, userID TEXT, password TEXT)";
+    private static final String TABLE_NAME = "users";
+    private static final String COLUMN_ID = "id";
+    private static final String COLUMN_FULL_NAME = "full_name";
+    private static final String COLUMN_JOB = "job";
+    private static final String COLUMN_ADDRESS = "address";
+    private static final String COLUMN_PHOTO_URL = "photo_url";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -21,51 +28,76 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_USERS_DETAILS);
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
+                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COLUMN_FULL_NAME + " TEXT,"
+                + COLUMN_JOB + " TEXT,"
+                + COLUMN_ADDRESS + " TEXT,"
+                + COLUMN_PHOTO_URL + " INTEGER"
+                + ")";
+        db.execSQL(CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Handle database upgrades if needed
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
     }
-    public Boolean register(String email,String name,String password){
-      SQLiteDatabase db = this.getWritableDatabase();
-      ContentValues values = new ContentValues();
-        values.put("userID",email);
-        values.put("password",password);
+
+    public void addUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_FULL_NAME, user.getFullName());
+        values.put(COLUMN_JOB, user.getJob());
+        values.put(COLUMN_ADDRESS, user.getAddress());
+        values.put(COLUMN_PHOTO_URL, user.getPhotoUrl());
+        db.insert(TABLE_NAME, null, values);
+        db.close();
+    }
+
+    public ArrayList<User> getAllUsers() {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<User> userList = new ArrayList<>();
 
 
+        String[] columns = {
+                UserContract.UserEntry.COLUMN_ID,
+                UserContract.UserEntry.COLUMN_NAME,
+                UserContract.UserEntry.COLUMN_JOB,
+                UserContract.UserEntry.COLUMN_ADDRESS,
+                UserContract.UserEntry.COLUMN_PHOTO_URL
+        };
 
-//      values.put(KEY_PH_NO,user.getPhoneNumber());
-        long result= db.insert("usersDetails",null,values);
-        if (result == -1){
-            return false;
-        }else {
-            return true;
+        Cursor cursor = db.query(UserContract.UserEntry.TABLE_NAME,
+                columns,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        while(cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex(UserContract.UserEntry.COLUMN_ID));
+            String name = cursor.getString(cursor.getColumnIndex(UserContract.UserEntry.COLUMN_NAME));
+            String job = cursor.getString(cursor.getColumnIndex(UserContract.UserEntry.COLUMN_JOB));
+            String address = cursor.getString(cursor.getColumnIndex(UserContract.UserEntry.COLUMN_ADDRESS));
+            int photoUrl = cursor.getInt(cursor.getColumnIndex(UserContract.UserEntry.COLUMN_PHOTO_URL));
+            String[] columnNames = cursor.getColumnNames();
+            Log.d(TAG, "Column names: " + Arrays.toString(columnNames));
+            User user = new User(id, name, job, address, photoUrl);
+            userList.add(user);
         }
 
+        cursor.close();
+        db.close();
 
-  }
-//  User user(int id){
-////      SQLiteDatabase db = this.getReadableDatabase();
-////      Cursor cursor=db.query(TABLE_USER, new String[] { KEY_ID,
-////                      KEY_EMAIL, KEY_PASSWORD }, KEY_ID + "=?",
-////              new String[] { String.valueOf(id) }, null, null, null, null);
-////      if (cursor != null)
-////          cursor.moveToFirst();
-////
-////      User user=new User(Integer.parseInt(cursor.getString(0)),
-////              cursor.getString(1), cursor.getString(2));
-////      return user;
-//  }
-public Cursor getData(String username, String password) {
-    SQLiteDatabase db = this.getWritableDatabase();
-    String query = "SELECT * FROM usersDetails"  + " WHERE userID = ? AND password = ?";
-    String[] selectionArgs = {username, password};
-    Cursor cursor = db.rawQuery(query, selectionArgs);
-    return cursor;
-}
-
-
+        return userList;
+    }
+    public long deleteEnter(String rowId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, COLUMN_ID+ "=?",new String[]{
+                rowId
+        } );
+    }
 
 }

@@ -94,6 +94,50 @@
                 android:textColorHighlight="#062E80"
                 android:textColorHint="#332932"
                 />
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/border"
+                android:padding="3pt">
+                <LinearLayout
+                    android:layout_width="300dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+
+
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+
+
+                    android:ems="10"
+                    android:focusable="true">
+                    <ImageButton
+                        android:layout_gravity="center"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/image_view"
+                        android:background="@drawable/baseline_upload_file_24"
+
+                        android:padding="1dp"
+                        android:textColorHighlight="#062E80"
+                        android:textColorHint="#332932"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="upload photo"
+                        android:gravity="center"
+                        android:textSize="20dp"
+                        android:textColorHighlight="#062E80"
+                        android:textColorHint="#332932"
+                        android:layout_gravity="center"/></LinearLayout>
+
+
+            </LinearLayout>
+
 
 
 

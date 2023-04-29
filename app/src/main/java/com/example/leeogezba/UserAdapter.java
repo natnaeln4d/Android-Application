@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 
@@ -33,10 +34,31 @@ public class UserAdapter extends ArrayAdapter<User> {
         ImageView imageView=convertView.findViewById(R.id.user_id);
         TextView fullName=convertView.findViewById(R.id.fullName);
         TextView address=convertView.findViewById(R.id.address);
+        TextView work=convertView.findViewById(R.id.work);
+        TextView edit=convertView.findViewById(R.id.edit);
+        TextView delete=convertView.findViewById(R.id.delete);
 
-        imageView.setImageResource(user.photoUrl);
-        fullName.setText(user.fullName);
-        address.setText(user.address);
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name=fullName.getText().toString();
+                DBHelper dbHelper=new DBHelper(getContext());
+                long i=dbHelper.deleteEnter(String.valueOf(user.getId()));
+                if(i==1){
+                    androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setCancelable(true);
+                    builder.setTitle("success");
+                    builder.setMessage("1."+name+": Deleted successfully");
+                    builder.show();
+
+                }
+            }
+        });
+
+       work.setText(user.getJob());
+        fullName.setText(user.getFullName());
+        address.setText(user.getAddress());
+
         return convertView;
     }
 }

@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class Regsteration extends Fragment {
        private EditText fullName,work,address;
-   private TextView titleTextView;
+   private TextView titleTextView ,edit, delect;
    private Button addButton;
    private ListView listView;
 
@@ -70,30 +70,49 @@ public class Regsteration extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ArrayList<User> userArrayList=new ArrayList<User>();
-        // Inflate the layout for this fragment
+        ArrayList<User> userArrayList = new ArrayList<User>();
         View view = inflater.inflate(R.layout.fragment_regsteration, container, false);
         ListView listView = view.findViewById(R.id.list_item);
-        int [] users = new int[4];
-        int[] image= {R.drawable.u1, R.drawable.u2, R.drawable.u3, R.drawable.u4};
-        String[] FullNames={"Natanel Getachew","yohanes Gertachew","Zebider miliket","Eyob Abate"};
-        String[] Jobs={"Developer","Doctor","Teacher","Artist"};
-        String[] Location={"jimma oromia Ethiopia","jijiga somali Ethiopia","harege East Ethiopia","A A Ethiopia"};
-        int i;
-        User user;
+        DBHelper dbHelper = new DBHelper(getActivity());
 
-        for(i=0;i<image.length;i++){
-            user=new User(users[i],FullNames[i],Jobs[i],Location[i],image[i]);
-            userArrayList.add(user);
-        }
-        UserAdapter adapter=new UserAdapter(getActivity(), userArrayList);
+        // Fetch user data from the database
+        userArrayList = dbHelper.getAllUsers();
+
+        // Create adapter and set it to list view
+        UserAdapter adapter = new UserAdapter(getActivity(), userArrayList);
         listView.setAdapter(adapter);
+
         return  view;
     }
+
+
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//
+//        ArrayList<User> userArrayList=new ArrayList<User>();
+//        // Inflate the layout for this fragment
+//        View view = inflater.inflate(R.layout.fragment_regsteration, container, false);
+//        ListView listView = view.findViewById(R.id.list_item);
+//        int [] users = new int[4];
+//        int[] image= {R.drawable.u1, R.drawable.u2, R.drawable.u3, R.drawable.u4};
+//        String[] FullNames={"Natanel Getachew","yohanes Gertachew","Zebider miliket","Eyob Abate"};
+//        String[] Jobs={"Developer","Doctor","Teacher","Artist"};
+//        String[] Location={"jimma oromia Ethiopia","jijiga somali Ethiopia","harege East Ethiopia","A A Ethiopia"};
+//        int i;
+//        User user;
+//
+//        for(i=0;i<image.length;i++){
+//            user=new User(users[i],FullNames[i],Jobs[i],Location[i],image[i]);
+//            userArrayList.add(user);
+//        }
+//        UserAdapter adapter=new UserAdapter(getActivity(), userArrayList);
+//        listView.setAdapter(adapter);
+//        return  view;
+//    }
 
 }
